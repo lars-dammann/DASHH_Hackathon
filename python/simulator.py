@@ -49,7 +49,7 @@ def simulate(ship, data):
 
         if timeSincePlugin >= ship.ChargePoint.pluginDelay:
             if ship.state.charge < ship.battery.ChargeLimitSoc:
-                # If plugged in long enough and SoC is below charge limit, do charge
+                # If plugged in long enough and state of charge (SoC) is below charge limit, do charge
                 addedCharge = ship.ChargePoint.powerLimit * dt / secsPerHour
                 addedChargePercentage = addedCharge / ship.battery.capacity
                 currentRecord.landPwr = ship.ChargePoint.powerLimit
@@ -67,6 +67,7 @@ def simulate(ship, data):
 
         #EnginePwr = controlStrategy.getEnginePower(ship, load) # Control Strategy is called
         EnginePwr = controlStrategy.MaxEngine(ship, load) # Control Strategy is called
+
         BatteryPwr = load - EnginePwr # Rest of load is covered by battery. Note: If engine provides more power than load, then the battery is charged
 
         currentRecord.engPwr = EnginePwr;
@@ -112,8 +113,25 @@ def simulate(ship, data):
         rvec.append(currentRecord)
         ship.state = currentRecord
 
+    CostFuel: float = 0.0
+    CostElectricity: float = 0.0
+    CostTotal: float = 0.0
+    CO2Fuel: float = 0.0
+    CO2Electricity: float = 0.0
+    CO2Total: float = 0.0
+
+    results.CO2Fuel = results.FuelConsumption * ship.engine.FuelC02EmissionsperKWH
+    results.CO2Electricity += results.EnergyShareLand * ship.ChargePoint.electricityCO2EmissionperKWH
+
+    results.CostFuel = results.FuelConsumption * ship.engine.FuelPriceperKWH
+    results.CostElectricity = results.EnergyShareLand * ship.ChargePoint.electricityPriceperKWh
+
+    results.CostTotal = results.CostFuel + results.CostElectricity
+    results.CO2Total = results.CO2Fuel + results. CO2Electricity
+
     rvec = pd.DataFrame(rvec)
     return {'results': results, 'record': rvec}
+
 
 def writeRecord(record, fname):
     ofname = fname.split('data',1)[1].split(".",1)[0][1:] + '_record.csv'

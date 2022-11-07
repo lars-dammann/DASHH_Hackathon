@@ -3,7 +3,6 @@ import time
 
 def readCSV(fname):
     data = pd.read_csv(fname, sep=',')
-    print(data)
     return data
 
 

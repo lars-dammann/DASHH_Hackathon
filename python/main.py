@@ -3,28 +3,40 @@ import time
 import csvReader
 import components
 import simulator
+import pandas as pd
 import sys
 import os
 
+
 def execute(fname):
+
+    # Read in the data
     dr = '../data/' + fname
     data = csvReader.readCSV(dr)
+
+    # Create a ship with default settings
     s = components.ship(**components.initialship)
-    s.display()
+    # s.display() # Outputs ship characteristics
+
+    # Start the simulator
     output = simulator.simulate(s, data)
     output['results'].display()
-    simulator.writeRecord(output['record'], fname)
 
-if len(sys.argv) == 1:
-    yourpath = '../data'
+    return output
 
-    for root, dirs, files in os.walk(yourpath, topdown=False):
-        for name in files:
-            if not name[0] == ".":
-                fname = os.path.join(root, name)
-                execute(fname)
+# This loops through every .csv in the folder you choose
+yourpath = sys.argv[1]
+allResults = []
+counter = 0
+for root, dirs, files in os.walk(yourpath, topdown=False):
+    for name in files:
+        if not name[0] == "." and counter <= 5:
+            fname = os.path.join(root, name)
+            out = execute(fname)
+            simulator.writeRecord(out['record'], fname)
+            allResults.append(out['results'])
+            counter += 1
 
 
-else:
-    fname = sys.argv[1]
-    execute(fname)
+allResults = pd.DataFrame(allResults)
+print(allResults.describe())

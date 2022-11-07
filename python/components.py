@@ -23,6 +23,8 @@ class SimResults:
     CostFuel: float = 0.0
     CostElectricity: float = 0.0
     CostTotal: float = 0.0
+    CO2Fuel: float = 0.0
+    CO2Electricity: float = 0.0
     CO2Total: float = 0.0
 
     def display(self):
@@ -36,9 +38,12 @@ class SimResults:
         ], tablefmt='orgtbl')).splitlines()
 
         eva_table = str(tabulate([
-        ['Total Cost', self.CostFuel + self.CostElectricity],
+        ['Cost Total', self.CostTotal],
         ['Cost Electricity', self.CostElectricity],
         ['Cost Fuel', self.CostFuel],
+        ['CO2 Total', self.CO2Total],
+        ['CO2 Electricity', self.CO2Electricity],
+        ['CO2 Fuel', self.CO2Fuel],
         ['Insufficient Power(s)', self.InsufPwrT],
         ['Insufficient Power(%)', self.InsufPwrT / self.TotalTime]
         ], tablefmt='orgtbl')).splitlines()
