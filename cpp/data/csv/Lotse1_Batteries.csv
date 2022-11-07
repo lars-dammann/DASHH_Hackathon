@@ -1,0 +1,4 @@
+Name|minCapacity|maxCapacity|ModuleCapacity|ModuleVoltage|ModulesPerRack|RackHeight|RackWidth|RackDepth|maxCRateChargeCont|maxCRateDischargeCont|maxCRateChargePeak|maxCRateDischargePeak|PeakLength|DischargeLimit|ChargeLimit|EOLCycles|Efficiency|PricePerKWh|CO2BackpackPerKWh|WeightPerKWh|VolumePerKWh
+Prime Battery 100% DoD 1C/1C|0|1000|3|51.1|NaN|NaN|NaN|NaN|1|1|1|1|10|0|1|6000|0.98|280|123|100|130
+Prime Battery 80% DoD 1C/1C|0|1000|3|51.1|NaN|NaN|NaN|NaN|1|1|1|1|10|0.1|0.9|7500|0.98|280|123|100|130
+Prime Battery 80% DoD .5C/.5C|0|1000|3|51.1|NaN|NaN|NaN|NaN|0.5|0.5|1|1|10|0.1|0.9|9000|0.98|280|123|100|130
