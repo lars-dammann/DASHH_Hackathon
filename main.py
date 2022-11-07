@@ -30,7 +30,7 @@ allResults = []
 counter = 0
 for root, dirs, files in os.walk(yourpath, topdown=False):
     for name in files:
-        if not name[0] == "." and counter <= 5:
+        if not name[0] == ".": # Prevents selecting hidden files
             fname = os.path.join(root, name)
             out = execute(fname)
             simulator.writeRecord(out['record'], fname)

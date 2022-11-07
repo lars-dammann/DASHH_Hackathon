@@ -18,7 +18,7 @@ Plot, Axis = plt.subplots()
 plt.subplots_adjust(bottom=0.25)
 
 # Set the x and y axis to some dummy data
-
+print(data)
 if len(sys.argv) == 2:
     plt_lst = ['load', 'batPwr', 'engPwr', 'powerDeficit', 'charge']
 else:

@@ -65,8 +65,8 @@ def simulate(ship, data):
             results.TimeShareRest += dt
 
 
-        #EnginePwr = controlStrategy.getEnginePower(ship, load) # Control Strategy is called
-        EnginePwr = controlStrategy.MaxEngine(ship, load) # Control Strategy is called
+        EnginePwr = controlStrategy.getEnginePower(ship, load) # Control Strategy is called
+        #EnginePwr = controlStrategy.MaxEngine(ship, load) # Control Strategy is called
 
         BatteryPwr = load - EnginePwr # Rest of load is covered by battery. Note: If engine provides more power than load, then the battery is charged
 
