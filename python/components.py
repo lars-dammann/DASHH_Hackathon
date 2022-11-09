@@ -57,7 +57,7 @@ class SimResults:
 @dataclass
 class Record:
     time: int = 0
-    load: float = 0.0 # load requirement over dt time units
+    load: float = 0.0 # load requirement in kw over dt time units
     engPwr: float = 0.0 # power provided by engine over dt time units
     batPwr: float = 0.0 # power provided by battery over dt time units
     landPwr: float = 0.0 # power charged by the charge point over dt time units
@@ -105,7 +105,7 @@ initialChargePoint = {
 
 @dataclass
 class battery:
-    capacity: float # Capacity of Battery in
+    capacity: float # Capacity of Battery in kWh
     etaBat: float # Battery Efficiency (ignore for hackathon)
     BatteryCO2BackpackperKWH: float # CO2 emitted in Battery production per kWh Battery Capacity
     BatteryPricePerKWh: float # in EUR

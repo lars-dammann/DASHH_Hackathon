@@ -24,10 +24,6 @@ def simulate(ship, data):
     timeSincePlugin = int(0)
     dt = int(10)
     time = int(0)
-    gf = {'minLat':ship.ChargePoint.minLat,
-        'maxLat':ship.ChargePoint.maxLat,
-        'minLon':ship.ChargePoint.minLon,
-        'maxLon':ship.ChargePoint.maxLon}
 
     # Simulation loop
     for index, row in data.iterrows():
